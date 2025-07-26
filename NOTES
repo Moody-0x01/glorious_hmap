@@ -1,0 +1,22 @@
+=========================== Hashtable structure ===========================
+struct bucket_t
+{
+	char *key;
+	void *value;
+	bucket_t *next;
+}
+struct {
+	bucket_t *buckets;
+	size_t size;
+	size_t cap;
+} ;
+
+- structure will be like this
+
+table {
+	buckets => {
+		node1 -> ...
+		node2 -> ...
+		node3 -> ...
+	}
+}

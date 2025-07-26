@@ -1,5 +1,5 @@
 MAIN=./src/main.c
-SRCS=./src/djb2_hash.c
+SRCS=./src/djb2_hash.c ./src/hmap.c
 OBJS=$(SRCS:%.c=%.o)
 NAME=./prog
 CC=cc
