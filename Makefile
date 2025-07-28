@@ -4,7 +4,7 @@ OBJS=$(SRCS:%.c=%.o)
 NAME=./prog
 CC=cc
 INCLUDE=-I./include
-CFLAGS=-Wall -Wextra -Werror $(INCLUDE)
+CFLAGS=-Wall -Wextra -Werror $(INCLUDE) -ggdb
 AR=ar rsc
 RM=rm -f
 
