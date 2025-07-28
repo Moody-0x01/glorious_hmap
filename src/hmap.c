@@ -1,21 +1,5 @@
 #include <hmap.h>
 
-// typedef struct bucket_t
-// {
-// 	char *key;
-// 	void *value;
-// 	bool taken;
-// 	size_t vsize;
-// 	bucket_t *next;
-// } bucket_t;
-//
-// typedef struct hmap_t
-// {
-// 	bucket_t *buckets;
-// 	size_t size; // How much buckets are already taken and full
-// 	size_t cap;  // How much buckets are already allocated
-// } hmap_t;
-
 // Constuctor
 hmap_t *new_hmap(size_t cap)
 {
@@ -102,4 +86,33 @@ void *hmap_get(hmap_t *hmap, char *key)
 		cell = cell->next;
 	}
 	return (NULL);
+}
+
+void hmap_clear(hmap_t *hmap)
+{
+	bucket_t *cell;
+	bucket_t *next;
+
+	for (size_t i = 0; i < hmap->cap; i++)
+	{
+		cell = hmap->buckets[i].next;
+		while (cell != NULL)
+		{
+			next = cell->next;
+			if (cell->taken)
+			{
+				free(cell->key);
+				free(cell->value);
+			}
+			free(cell);
+			cell = next;
+		}
+		hmap->buckets[i].next = NULL;
+		if (hmap->buckets[i].taken)
+		{
+			free(hmap->buckets[i].key);
+			free(hmap->buckets[i].value);
+			hmap->buckets[i].taken = false;
+		}
+	}
 }

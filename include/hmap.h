@@ -27,5 +27,6 @@ void destroy_hmap(hmap_t *hmap);
 hmap_t *new_hmap(size_t cap);
 void hmap_insert(hmap_t *hmap, char *key, void *value, size_t value_size);
 void *hmap_get(hmap_t *hmap, char *key);
+void hmap_clear(hmap_t *hmap);
 
 #endif // !MAP_H
