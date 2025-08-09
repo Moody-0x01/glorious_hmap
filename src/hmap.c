@@ -132,6 +132,7 @@ void hmap_clear(hmap_t *hmap)
 			{
 				free(cell->key);
 				free(cell->value);
+				hmap->size--;
 			}
 			free(cell);
 			cell = next;
@@ -142,6 +143,7 @@ void hmap_clear(hmap_t *hmap)
 			free(hmap->buckets[i].key);
 			free(hmap->buckets[i].value);
 			hmap->buckets[i].taken = false;
+			hmap->size--;
 		}
 	}
 }

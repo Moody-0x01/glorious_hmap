@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#define HMAP_INIT_CAP 64 * 2
+
 typedef struct bucket_t bucket_t;
 typedef struct bucket_t
 {
