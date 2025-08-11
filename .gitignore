@@ -1,3 +1,7 @@
+./tests/*.input
+./bin/*
+/bin
+bin
 *.py
 *.o
 *.a
