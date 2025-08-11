@@ -1,4 +1,6 @@
 ./tests/words.input
+/tests/words.input
+tests/words.input
 ./bin/*
 /bin
 bin

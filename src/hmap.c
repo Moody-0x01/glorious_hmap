@@ -19,9 +19,9 @@ hmap_t *new_hmap(size_t cap)
 	memset(hmap->clusters, 0, sizeof(*hmap->clusters) * cap);
 	for (size_t i = 0; i < cap; ++i)
 	{
-		hmap->clusters[i].buckets = malloc(sizeof(*hmap->clusters[i].buckets) * cap);
-		memset(hmap->clusters[i].buckets, 0, sizeof(*hmap->clusters[i].buckets) * cap);
-		hmap->clusters[i].cap = cap;
+		hmap->clusters[i].buckets = malloc(sizeof(*hmap->clusters[i].buckets) * INIT_BUCKET);
+		memset(hmap->clusters[i].buckets, 0, sizeof(*hmap->clusters[i].buckets) * INIT_BUCKET);
+		hmap->clusters[i].cap = INIT_BUCKET;
 	}
 	hmap->vacant = stack_construct();
 #endif // !HMAP_LLIMPLEMENTATION
@@ -214,7 +214,6 @@ void hmap_clear(hmap_t *hmap)
 	bucket_t *cell;
 	#ifdef HMAP_LLIMPLEMENTATION
 		bucket_t *next;
-
 		for (size_t i = 0; i < hmap->cap; i++)
 		{
 			cell = hmap->buckets[i].next;
@@ -250,11 +249,21 @@ void hmap_clear(hmap_t *hmap)
 					free(cell->key);
 					free(cell->value);
 					hmap->size--;
-					hmap->clusters[i].size--;
 				}
 				memset(cell, 0, sizeof(*cell));
 			}
+			hmap->clusters[i].size = 0;
 		}
+
 		hmap->vacant->size = 0;
 	#endif // HMAP_LLIMPLEMENTATION
+}
+
+char *get_impl_desc(void)
+{
+	#ifdef HMAP_LLIMPLEMENTATION
+		return "Linked List";
+	#else
+		return "Array";
+	#endif /* ifdef HMAP_LLIMPLEMENTATION */
 }

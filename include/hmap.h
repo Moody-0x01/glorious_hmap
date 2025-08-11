@@ -2,10 +2,12 @@
 #define MAP_H
 
 #include <stack.h>
-
-// #define HMAP_LLIMPLEMENTATION // Linked List
-// #define HMAP_DYN_ARRAY        // Array
+#include <config.h>
+#if !defined(HMAP_LLIMPLEMENTATION) && !defined(HMAP_DYN_ARRAY)
+	#define HMAP_LLIMPLEMENTATION
+#endif // !defined(HMAP_LLIMPLEMENTATION) && !defined(HMAP_LLIMPLEMENTATION)
 #define HMAP_INIT_CAP 64 * 2
+#define INIT_BUCKET 64
 
 typedef struct bucket_t bucket_t;
 typedef struct bucket_t
@@ -51,5 +53,6 @@ void hmap_foreach(hmap_t *hmap, void (*func)(bucket_t *cell));
 	int	hmap_find_pair(hmap_t *hmap, char *key, t_pair *pair);
 	void cluster_expand(bucket_cluster_t *cluster);
 #endif /* ifdef HMAP_DYN_ARRAY */
+char *get_impl_desc(void);
 
 #endif // !MAP_H
