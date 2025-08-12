@@ -40,7 +40,7 @@ int main(int ac, char **av)
 		}
 		word = strtok(NULL, "\n\t ");
 	}
-	// hmap_foreach(mp, print);
+	hmap_foreach(mp, print);
 	destroy_hmap(mp);
 	free(data);
 	printf("[ %s ] Took: %ldms\n", get_impl_desc(), get_timestamp() - s);

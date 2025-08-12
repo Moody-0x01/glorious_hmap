@@ -15,13 +15,20 @@ hmap_t *new_hmap(size_t cap)
 	hmap->buckets = malloc(sizeof(*hmap->buckets) * cap);
 	memset(hmap->buckets, 0, sizeof(*hmap->buckets) * cap);
 #else
+	// #ifdef HMAP_PROBE
+	// 	cap = 1;
+	// #endif /* ifdef HMAP_PROBE */
 	hmap->clusters = malloc(sizeof(*hmap->clusters) * cap);
 	memset(hmap->clusters, 0, sizeof(*hmap->clusters) * cap);
 	for (size_t i = 0; i < cap; ++i)
 	{
-		hmap->clusters[i].buckets = malloc(sizeof(*hmap->clusters[i].buckets) * INIT_BUCKET);
-		memset(hmap->clusters[i].buckets, 0, sizeof(*hmap->clusters[i].buckets) * INIT_BUCKET);
+		// #ifdef HMAP_PROBE
+		// 	hmap->clusters[i].cap = INIT_PROBING_SIZE;
+		// #else
 		hmap->clusters[i].cap = INIT_BUCKET;
+		// #endif /* ifdef HMAP_PROBE */
+		hmap->clusters[i].buckets = malloc(sizeof(*hmap->clusters[i].buckets) * hmap->clusters[i].cap);
+		memset(hmap->clusters[i].buckets, 0, sizeof(*hmap->clusters[i].buckets) * hmap->clusters[i].cap);
 	}
 	hmap->vacant = stack_construct();
 #endif // !HMAP_LLIMPLEMENTATION

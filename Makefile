@@ -7,7 +7,7 @@ BIN=./bin
 LIB=$(LIBD)/libhmap.a
 SRCS=./src/djb2_hash.c ./src/hmap.c ./src/stack.c ./src/stack_manipulation.c
 OBJS=$(SRCS:%.c=%.o)
-NAME=./prog
+NAME=./main
 CC=cc
 CXX=c++
 INCLUDE=-I./include

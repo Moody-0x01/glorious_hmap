@@ -64,7 +64,7 @@ int main()
 
 		Del(mp, "5");
 		assert(mp->size == 2 && "It is not zero for whatever reason");
-		
+
 		Del(mp, "6");
 		assert(mp->size == 1 && "It is not zero for whatever reason");
 
@@ -80,3 +80,11 @@ int main()
 	destroy_hmap(mp);
 	return (0);
 }
+
+// int main(int ac, char **av)
+// {
+// 	if (ac < 2)
+// 		return (1);
+// 	printf("Hash: %ld, Key: %s\n", hmap_hash(av[1]), av[1]);
+// 	return (0);
+// }

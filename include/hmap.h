@@ -3,11 +3,14 @@
 
 #include <stack.h>
 #include <config.h>
+#include <stdint.h>
+// #define HMAP_PROBE
 #if !defined(HMAP_LLIMPLEMENTATION) && !defined(HMAP_DYN_ARRAY)
 	#define HMAP_LLIMPLEMENTATION
 #endif // !defined(HMAP_LLIMPLEMENTATION) && !defined(HMAP_LLIMPLEMENTATION)
 #define HMAP_INIT_CAP 64 * 2
 #define INIT_BUCKET 64
+#define INIT_PROBING_SIZE INIT_BUCKET * 2
 
 typedef struct bucket_t bucket_t;
 typedef struct bucket_t
