@@ -5,6 +5,7 @@ MAIN=./src/main.c
 LIBD=./lib
 BIN=./bin
 LIB=$(LIBD)/libhmap.a
+DYN_LIB=$(LIBD)/libhmap.so
 SRCS=./src/djb2_hash.c ./src/hmap.c ./src/stack.c ./src/stack_manipulation.c
 OBJS=$(SRCS:%.c=%.o)
 NAME=./main
@@ -24,6 +25,7 @@ $(BIN):
 	mkdir -p $(BIN)
 $(LIB): $(LIBD) $(OBJS)
 	$(AR) $@ $(OBJS)
+
 $(NAME): $(MAIN) $(LIB) $(BIN)
 	$(CC) $(CFLAGS) $(INCLUDE) $(MAIN) -L$(LIBD) -lhmap -o $(BIN)/$@
 	$(CC) $(CFLAGS) $(INCLUDE) ./tests/word_counter.c -L$(LIBD) -lhmap -o $(BIN)/counter
